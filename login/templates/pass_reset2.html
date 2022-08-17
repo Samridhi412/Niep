@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="alert alert-warning" role="alert">
+        <h3>{% for msg in messages %}
+            {{msg}}
+            {% endfor %}</h3>
+        </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card-mt-5">
+                <div class="card-body">
+                    <div class="card-title py-3">
+                        <h4>Please enter your email to get reset link</h4>
+                    </div>
+                    <form action="request-password" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email address</label>
+                            <input id="email" type="email" class="form-control" name="email" placeholder="name@thapar.edu" aria-describedby="emailHelp" required>
+                            <div id="emailHelp" class="form-text"></div>
+                          </div>
+                        <button type="submit" class="btn btn-success">RESET PASSWORD</button>
+                    </form>
+                </div>
+            </div>
+    <div class="col-md-4"></div>
+    </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+    {% load static%}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,maximun-scale=1,minimun-scale=1">
+        <title>Register Page</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!--            <a class="navbar-brand" href="/">Login System</a>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'login' %}">Login <span class="sr-only">(current)</span></a>
+                </li>
+
+              </ul>
+
+            </div>
+          </nav>
+
+        {% if messages %}
+           {% for mess in messages %}
+           <div class="alert alert-{{mess.tags}}" role="alert">
+             {{mess}}
+            {% endfor %}
+        {% endif %}
+           </div>
+
+        <div class="container-sm"  style="width: 30rem;">
+          {% if otp %}
+          <form action="register" method="POST">
+           {% csrf_token %}
+           <fieldset class="form-group">
+             <legend class="border-bottom display">
+               <h1 class="float-left">VERIFY YOUR EMAIL</h1>
+             </legend>
+             <input type="hidden" name="usr" value="{{usr.username}}">
+             <div class="input-group mb-3">
+               <div class="input-group-prepend">
+                 <span class="input-group-text" id="basic-addon1">OTP</span>
+               </div>
+               <input type="text" class="form-control" placeholder="Enter your OTP" aria-label="OTP" aria-describedby="basic-addon1" name="otp">
+             </div>
+           </fieldset>
+           <div class="form-group">
+             <button class="btn btn-success" type="submit">VERIFY</button>
+             <small class="float-right text-muted"><i><a href="{% url 'login' %}" class="text-dark"><i id="resendotpmess">RESENT</i>OTP</a></i></small>
+           </div>
+          </form>
+          {% else %}
+          <form action="register" method="POST">
+          {% csrf_token %}
+          <center>
+            <h4 class="alert-heading">Create an account</h4>
+        </center>
+            <div class="row">
+              <div class="col">
+                   <label for="first_name" class="form-label">FIRSTNAME</label>
+                <input id="first_name" type="text" class="form-control" placeholder="First name" name='first_name' required>
+              </div>
+              <div class="col">
+                   <label for="last_name" class="form-label">LASTNAME</label>
+                <input id="last_name" type="text" class="form-control" placeholder="Last name" name='last_name' required>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+                 <label for="username" class="form-label">USERNAME</label>
+              <input id="username" type="text" class="form-control" name='username' placeholder="username" required>
+            </div>
+            <div class="form-group">
+    <label for="email" class="form-label">Email address</label>
+    <input id="email" type="email" class="form-control" name="email" placeholder="name@thapar.edu" aria-describedby="emailHelp" required>
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+            <div class="form-group">
+    <label for="phone" class="form-label">Phone_Number</label>
+    <input id="phone" type="tel" class="form-control" name="phone" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+  <small>Format: 123-456-7890</small>
+  </div>
+            <div class="form-group">
+  <label  class="form-label">Gender</label><br>
+  <input class="form-control" id="s1" type="radio" name="show" value="Male" required><label for="s1">Male</label><br>
+  <input class="form-control" id="s2" type="radio" name="show" value="Female" required><label for="s2">Female</label><br>
+  </div>
+            <div class="form-group">
+    <label for="dropdown" class="form-label">Course/Stream</label>
+    <select name="dropdown" id="dropdown" class="form-control">
+      <option value="COPC">COPC</option>
+       <option value="COSE">COSE</option>
+       <option value="ENC" >ENC</option>
+       <option value="COE" >COE</option>
+       <option value="ELE">ELE</option>
+       <option value="ECE">ECE</option>
+       <option value="MEC">MEC</option>
+       <option value="CHE">CHE</option>
+       <option value="MBA">MBA</option>
+    </select>
+  </div>
+            <div class="form-group">
+    <label for="roll_no" class="form-label">ROLL_NO</label>
+    <input type="number" id="roll_no" class="form-control" name="roll_no" maxlength="20" min="1"  required>
+  </div>
+            <div class="form-group">
+              <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="password" name="password" required>
+            </div>
+            <div class="form-group">
+    <label for="confirm_password" class="form-label">Confirm_Password</label>
+    <input type="password" id="confirm_password" class="form-control" name="confirm_password">
+  </div>
+            <button type="submit" class="btn btn-success">Create an Account</button>
+            <h6>already  have account <a href="{% url 'login'%}">login</a></h6>
+         {% if messages %}
+         {% for messages in messages %}
+          <h2 style="color: green;">{{ messages }}</h2>
+         {% endfor %}
+         {% endif %}
+          </form>
+          {% endif %}
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+       integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </body>
+    </html>
