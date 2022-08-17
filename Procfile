@@ -1,1 +1,1 @@
-web: waitress-serve --port=8000 nps.wsgi:application
+web: gunicorn nps.wsgi --log-file 
