@@ -1,1 +1,1 @@
-web: gunicorn nps.wsgi --log-file 
+web: gunicorn nps.wsgi --log-file -
