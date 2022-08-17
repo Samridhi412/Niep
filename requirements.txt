@@ -1,4 +1,4 @@
-﻿asgiref==3.5.2
+asgiref==3.5.2
 cffi==1.15.1
 colorama==0.4.5
 cryptography==37.0.4
@@ -11,6 +11,7 @@ mysql-connector-python-rf==2.2.2
 mysqlclient==2.1.1
 numpy==1.23.2
 opencv-python==4.6.0.66
+opencv-python-headless==4.6.0.66
 Pillow==9.2.0
 pycparser==2.21
 pyzbar==0.1.9
@@ -20,4 +21,3 @@ sqlparse==0.4.2
 tzdata==2022.2
 waitress==2.1.2
 whitenoise==6.2.0
-opencv-python-headless==4.2.0.32
